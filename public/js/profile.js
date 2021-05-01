@@ -2,16 +2,22 @@ const newFormHandler = async (event) => {
   event.preventDefault();
 
   const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document.querySelector('#project-funding').value.trim();
+  const needed_funding = document
+    .querySelector('#project-funding')
+    .value.trim();
   const description = document.querySelector('#project-desc').value.trim();
+  const image = document.getElementById('project-img').files[0];
 
   if (name && needed_funding && description) {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('needed_funding', needed_funding);
+    formData.append('description', description);
+    formData.append('image', image);
+
     const response = await fetch(`/api/projects`, {
       method: 'POST',
-      body: JSON.stringify({ name, needed_funding, description }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: formData,
     });
 
     if (response.ok) {
