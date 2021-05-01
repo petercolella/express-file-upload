@@ -27,6 +27,10 @@ Project.init(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    image: {
+      type: DataTypes.STRING,
+      defaultValue: 'default.png',
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
